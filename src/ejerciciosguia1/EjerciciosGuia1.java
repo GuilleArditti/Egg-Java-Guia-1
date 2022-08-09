@@ -6,6 +6,7 @@
 package ejerciciosguia1;
 import java.util.Scanner;
 import java.lang.Math;
+import java.util.Random;
 
 /**
  *
@@ -120,7 +121,9 @@ public class EjerciciosGuia1 {
         }
          System.out.println("Limite excedido");
      }
+     
      public static void operaciones(){
+         
          System.out.println("Ingrese un numero");
          
          int numero1;
@@ -134,12 +137,13 @@ public class EjerciciosGuia1 {
          numero2=scan1.nextInt();
          
          System.out.println("Numeros Ingresados: " + numero1 + " y " + numero2);
-         System.out.println("\n MENU \n 1.SUMAR \n 2.RESTAR \n 3.MULTIPLICAR \n 4.DIVIDIR \n 5.SALIR \n Elija opción: " );
+         
          
          int opcion;
-         String salida;
+         String salida="";
          
          do{
+         System.out.println("\n MENU \n 1.SUMAR \n 2.RESTAR \n 3.MULTIPLICAR \n 4.DIVIDIR \n 5.SALIR \n Elija opción: " );
          Scanner scan2= new Scanner(System.in);
          opcion=scan2.nextInt();
          
@@ -156,22 +160,106 @@ public class EjerciciosGuia1 {
              case 4:
                  System.out.println( "La división da como resultado: " + numero1/numero2);
                  break;
-             default:
+             case 5:
                  System.out.println("Seguro desea salir? S/N");
                  Scanner scan3 = new Scanner(System.in);
                  salida=scan3.nextLine();
-                 while( salida.equalsIgnoreCase("s") || salida.equalsIgnoreCase("n")){
-                    if(salida.equalsIgnoreCase("S")){
+                    if(salida.equalsIgnoreCase("n")){
                         break;
                     }
                     else{
-                        continue;
+                        if(salida.equalsIgnoreCase("s")){
+                            System.out.println("Adios!");
+                        }
                     }
-                 }
          }
-         System.out.println("\n MENU \n 1.SUMAR \n 2.RESTAR \n 3.MULTIPLICAR \n 4.DIVIDIR \n 5.SALIR \n Elija opción: " );
-         }while(opcion!=5);
+         }while(!salida.equalsIgnoreCase("s"));
      }
+
+     public static String dispositivoRS232(){
+         String cadena;
+         int correctas=0;
+         int incorrectas=0;
+         do{
+             System.out.println("Ingrese una cadena");
+             Scanner scan= new Scanner(System.in);
+             cadena=scan.nextLine();
+             if(cadena.length()==5 && cadena.substring(0, 1).equalsIgnoreCase("x") && cadena.endsWith("o") || cadena.endsWith("O")){
+                 correctas=correctas+1;
+             }
+             else{
+                 if(!cadena.equals("&&&&&"))
+                 incorrectas=incorrectas+1;
+             }
+             
+         }while(!cadena.equals("&&&&&"));
+         
+         return " La cantidad de cadenas correctas fueron: " + correctas +
+                 "\n La cantidad de cadenas incorrectas fueron: " + incorrectas;
+     }
+     
+     public static void dibujarCuadrado(int n){
+         for(int i=1;i<=n;i++){
+             for(int j=1;j<=n;j++){
+                if(i==1 || i==n){
+                    System.out.print("*");
+                }
+                else{
+                    if(j==1 || j==n){
+                    System.out.print("*");
+                    }
+                    else{
+                        System.out.print(" ");
+                    }
+                }
+            }
+             System.out.println(" ");
+        }
+     }
+     
+     public static void convertirAEuros(int cantEuros, String moneda){
+         if(moneda.equalsIgnoreCase("libras")){
+             System.out.println(cantEuros + " Euros son " + cantEuros*0.86 + " Libras");
+         }
+         if(moneda.equalsIgnoreCase("dolares")){
+             System.out.println(cantEuros + " Euros son " + cantEuros*1.28611 + " Dólares");
+         }
+         if(moneda.equalsIgnoreCase("yenes")){
+             System.out.println(cantEuros + " Euros son " + cantEuros*129.852 + " Yenes");
+         }
+     }
+     
+     public static void rellenarVector(){
+         int[] vector= new int [100];
+         for(int i=1;i<100;i++){
+             vector[i]=i;
+             System.out.print("[" + vector[i] + "]");
+         }
+         System.out.println("");
+     }
+     public static void rellenarVectorDeTamañoN(int n, int buscarNum){
+        int [] vector= new int[n];
+        int contador=0;
+        int numero = (int)(Math. random()*10+1);
+        for(int i=0;i<n;i++){
+            vector[i]=numero;
+            numero = (int)(Math. random()*10+1);
+            System.out.print("[" + vector[i] + "]");
+         }
+         System.out.println(" ");
+        for(int i=0;i<n;i++){
+            if(vector[i]==buscarNum){
+                contador=contador+1;
+                System.out.println(buscarNum + " Se encuentra en la posición " + i + " del vector");
+            }
+        }
+         System.out.println("");
+         if(contador==0){
+         System.out.println(buscarNum + " No esta en el vector");
+         }
+        }
+     
+     
      
     public static void main(String[] args) {
         // TODO code application logic here
@@ -185,9 +273,12 @@ public class EjerciciosGuia1 {
         //longitudIgualA8("competicion");
         //primeraLetraEsA("Amigo");
         //limite();
-        operaciones();
-       
-        
+        //operaciones();
+        //System.out.println(dispositivoRS232());
+        //dibujarCuadrado(50);
+        //convertirAEuros(1, "yenes");
+        //rellenarVector();
+        rellenarVectorDeTamañoN(4,3);
     }
     
 }
